@@ -10,44 +10,55 @@
       overflow: hidden;
       background: black;
     }
+    #start-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      padding: 1rem 2rem;
+      cursor: pointer;
+      z-index: 999;
+    }
     video {
       width: 100vw;
       height: 100vh;
       object-fit: cover;
-      position: fixed;
-      top: 0;
-      left: 0;
+      display: none;
     }
   </style>
 </head>
 <body>
-  <!-- ВИДЕО без звука -->
-  <video autoplay loop muted playsinline>
+  <button id="start-btn">🔊 Запустить</button>
+
+  <video id="vid" loop muted playsinline>
     <source src="screamer.mp4" type="video/mp4" />
-    Ваш браузер не поддерживает видео.
   </video>
 
-  <!-- ЗВУК -->
-  <audio id="sfx" autoplay>
+  <audio id="sfx">
     <source src="screamer-sound.mp3" type="audio/mpeg" />
-    Ваш браузер не поддерживает аудио.
   </audio>
 
   <script>
+    const btn = document.getElementById("start-btn");
+    const video = document.getElementById("vid");
     const audio = document.getElementById("sfx");
 
-    // Попытка автозапуска аудио
-    audio.play().catch(() => {
-      console.warn("Автозапуск со звуком заблокирован. Нужна ручная активация.");
-    });
+    btn.addEventListener("click", async () => {
+      btn.style.display = "none";
+      video.style.display = "block";
 
-    // Полноэкранный режим
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        if (document.body.requestFullscreen) {
-          document.body.requestFullscreen().catch(() => {});
-        }
-      }, 1000);
+      try {
+        await video.play();
+        await audio.play();
+      } catch (err) {
+        console.error("Ошибка запуска медиа:", err);
+      }
+
+      // Переход в fullscreen
+      if (document.body.requestFullscreen) {
+        document.body.requestFullscreen().catch(() => {});
+      }
     });
   </script>
 </body>
