@@ -19,8 +19,10 @@ btn.addEventListener("click", async () => {
     console.error("Ошибка запуска медиа:", err);
   }
 
-  // Переход в fullscreen
-  if (document.body.requestFullscreen) {
-    document.body.requestFullscreen().catch(() => {});
+  // Переход в полноэкранный режим
+  if (video.requestFullscreen) {
+    video.requestFullscreen().catch(() => {});  // Если не поддерживает, не показывать ошибку
+  } else if (document.documentElement.requestFullscreen) {
+    document.documentElement.requestFullscreen();  // Если video не поддерживает, пробуем на document
   }
 });
