@@ -9,20 +9,20 @@ window.addEventListener("load", () => {
 });
 
 btn.addEventListener("click", async () => {
-  btn.style.display = "none";
-  video.style.display = "block";
+  btn.style.display = "none"; // Прячем кнопку
+  video.style.display = "block"; // Показываем видео
 
   try {
-    await video.play();
-    await audio.play();
+    await video.play(); // Запуск видео
+    await audio.play(); // Запуск звука
   } catch (err) {
     console.error("Ошибка запуска медиа:", err);
   }
 
   // Переход в полноэкранный режим
   if (video.requestFullscreen) {
-    video.requestFullscreen().catch(() => {});  // Если не поддерживает, не показывать ошибку
+    video.requestFullscreen().catch(() => {});  // Пробуем сделать видео полноэкранным
   } else if (document.documentElement.requestFullscreen) {
-    document.documentElement.requestFullscreen();  // Если video не поддерживает, пробуем на document
+    document.documentElement.requestFullscreen();  // Если видео не поддерживает полноэкранный режим, делаем для документа
   }
 });
