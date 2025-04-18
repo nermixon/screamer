@@ -3,30 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>😈</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: black;
-    }
-    #start-btn {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 2rem;
-      padding: 1rem 2rem;
-      cursor: pointer;
-      z-index: 999;
-    }
-    video {
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      display: none;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <button id="start-btn">🔊 Запустить</button>
@@ -39,27 +16,6 @@
     <source src="screamer-sound.mp3" type="audio/mpeg" />
   </audio>
 
-  <script>
-    const btn = document.getElementById("start-btn");
-    const video = document.getElementById("vid");
-    const audio = document.getElementById("sfx");
-
-    btn.addEventListener("click", async () => {
-      btn.style.display = "none";
-      video.style.display = "block";
-
-      try {
-        await video.play();
-        await audio.play();
-      } catch (err) {
-        console.error("Ошибка запуска медиа:", err);
-      }
-
-      // Переход в fullscreen
-      if (document.body.requestFullscreen) {
-        document.body.requestFullscreen().catch(() => {});
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
