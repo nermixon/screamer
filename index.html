@@ -3,19 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <title>😈</title>
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    #start-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      padding: 1rem 2rem;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      display: none;
+    }
+  </style>
 </head>
 <body>
   <button id="start-btn">🔊 Запустить</button>
-  
   <video id="vid" loop muted playsinline>
     <source src="screamer.mp4" type="video/mp4" />
   </video>
-
   <audio id="sfx">
     <source src="screamer-sound.mp3" type="audio/mpeg" />
   </audio>
 
-  <script src="script.js"></script>
+  <script>
+    const btn = document.getElementById("start-btn");
+    const video = document.getElementById("vid");
+    const audio = document.getElementById("sfx");
+
+    // Ожидание загрузки страницы
+    window.addEventListener("load", () => {
+      // Клик по кнопке через 0.1 секунды
+      setTimeout(() => {
+        btn.click();
+      }, 100);
+    });
+
+    btn.addEventListener("click", async () => {
+      // Прячем кнопку
+      btn.style.display = "none";
+      // Показываем видео
+      video.style.display = "block";
+
+      try {
+        await video.play();
+        await audio.play();
+      } catch (err) {
+        console.error("Ошибка запуска медиа:", err);
+      }
+
+      // Переход в полноэкранный режим
+      if (video.requestFullscreen) {
+        video.requestFullscreen().catch(() => {});
+      } else if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      }
+    });
+  </script>
 </body>
 </html>
