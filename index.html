@@ -1,41 +1,54 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scary Scream</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>😈</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+    }
+    video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+  </style>
 </head>
 <body>
-    <!-- Видео с автозапуском и зацикливанием -->
-    <video autoplay loop muted>
-        <source src="screamer.mp4" type="video/mp4">
-        Ваш браузер не поддерживает видео.
-    </video>
+  <!-- ВИДЕО без звука -->
+  <video autoplay loop muted playsinline>
+    <source src="screamer.mp4" type="video/mp4" />
+    Ваш браузер не поддерживает видео.
+  </video>
 
-    <!-- Скрипт для блокировки экрана -->
-    <script>
-        // Блокировка экрана
-        window.addEventListener("load", function() {
-            setTimeout(function() {
-                document.body.requestFullscreen(); // Переводит страницу в полноэкранный режим
-            }, 1000); // Задержка в 1 секунду перед попыткой перевести в полноэкранный режим
-        });
-    </script>
+  <!-- ЗВУК -->
+  <audio id="sfx" autoplay>
+    <source src="screamer-sound.mp3" type="audio/mpeg" />
+    Ваш браузер не поддерживает аудио.
+  </audio>
+
+  <script>
+    const audio = document.getElementById("sfx");
+
+    // Попытка автозапуска аудио
+    audio.play().catch(() => {
+      console.warn("Автозапуск со звуком заблокирован. Нужна ручная активация.");
+    });
+
+    // Полноэкранный режим
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        if (document.body.requestFullscreen) {
+          document.body.requestFullscreen().catch(() => {});
+        }
+      }, 1000);
+    });
+  </script>
 </body>
 </html>
