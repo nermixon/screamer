@@ -11,12 +11,12 @@ window.addEventListener("load", () => {
 });
 
 btn.addEventListener("click", async () => {
-  btn.style.display = "none";
-  video.style.display = "block";
+  btn.style.display = "none"; // Скрыть кнопку
+  video.style.display = "block"; // Показать видео
 
   try {
-    await video.play();
-    await audio.play();
+    await video.play();  // Воспроизвести видео
+    await audio.play();  // Воспроизвести звук
   } catch (err) {
     console.error("Ошибка запуска медиа:", err);
   }
