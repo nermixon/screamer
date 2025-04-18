@@ -2,21 +2,21 @@ const btn = document.getElementById("start-btn");
 const video = document.getElementById("vid");
 const audio = document.getElementById("sfx");
 
-// Эмулируем клик по кнопке через 2 секунды после загрузки страницы
+// Эмулируем клик по кнопке через 0.1 секунды после загрузки страницы
 window.addEventListener("load", () => {
   setTimeout(() => {
-    // Клик по кнопке
+    // Эмуляция клика по кнопке
     btn.click();
-  }, 2000);  // Задержка 2 секунды, чтобы дать время на прогрузку
+  }, 100);  // Задержка 0.1 секунды, чтобы сразу эмулировать клик
 });
 
 btn.addEventListener("click", async () => {
   btn.style.display = "none"; // Скрыть кнопку
-  video.style.display = "block"; // Показать видео
+  video.style.display = "block"; // Показать видео на весь экран
 
   try {
-    await video.play();  // Воспроизвести видео
-    await audio.play();  // Воспроизвести звук
+    await video.play();  // Воспроизведение видео
+    await audio.play();  // Воспроизведение звука
   } catch (err) {
     console.error("Ошибка запуска медиа:", err);
   }
