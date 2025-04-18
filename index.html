@@ -1,17 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Screamer</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scary Scream</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
-  <video id="screamer" autoplay loop muted playsinline>
-    <source src="screamer.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+    <!-- Видео с автозапуском и зацикливанием -->
+    <video autoplay loop muted>
+        <source src="screamer.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+    </video>
 
-  <script src="script.js"></script>
+    <!-- Скрипт для блокировки экрана -->
+    <script>
+        // Блокировка экрана
+        window.addEventListener("load", function() {
+            setTimeout(function() {
+                document.body.requestFullscreen(); // Переводит страницу в полноэкранный режим
+            }, 1000); // Задержка в 1 секунду перед попыткой перевести в полноэкранный режим
+        });
+    </script>
 </body>
 </html>
