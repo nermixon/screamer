@@ -1,14 +1,28 @@
-const video = document.getElementById("screamer");
+const btn = document.getElementById("start-btn");
+const video = document.getElementById("vid");
+const audio = document.getElementById("sfx");
 
+// Эмулируем клик по кнопке через 2 секунды после загрузки страницы
 window.addEventListener("load", () => {
-  video.muted = false;
-  video.volume = 1.0;
+  setTimeout(() => {
+    // Клик по кнопке
+    btn.click();
+  }, 2000);  // Задержка 2 секунды, чтобы дать время на прогрузку
+});
 
-  const playPromise = video.play();
+btn.addEventListener("click", async () => {
+  btn.style.display = "none";
+  video.style.display = "block";
 
-  if (playPromise !== undefined) {
-    playPromise.catch(err => {
-      console.error("Автоплей заблокирован. Попробуй снять мут или дать фокус в другом окне.");
-    });
+  try {
+    await video.play();
+    await audio.play();
+  } catch (err) {
+    console.error("Ошибка запуска медиа:", err);
+  }
+
+  // Переход в fullscreen
+  if (document.body.requestFullscreen) {
+    document.body.requestFullscreen().catch(() => {});
   }
 });
