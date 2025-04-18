@@ -4,8 +4,8 @@ const audio = document.getElementById("sfx");
 
 window.addEventListener("load", () => {
   setTimeout(() => {
-    btn.click();  // Автоматическое нажатие кнопки через 0.1 секунды
-  }, 100);  // Задержка 0.1 секунды
+    btn.click(); // Клик по кнопке через 0.1 секунды после загрузки страницы
+  }, 100);
 });
 
 btn.addEventListener("click", async () => {
